@@ -259,7 +259,7 @@ return true;
 // Function Call
 isPalindrome("racecar"); //function call
 
-
+ 
 
 //Return the numerical value (base-10) of an input of Roman numerals.
 function RomeInt(str) {
