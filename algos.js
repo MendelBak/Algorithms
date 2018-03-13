@@ -250,12 +250,16 @@ add1(10);
 //Return Boolean whether input string is a palindrome or not.
 function isPalindrome(str) {
   var i = 0;
-  for (i = 0; i < str.length / 2; i++) {
-    return false;
+  for (i = 0; i < str.length/2; i++) {
+    console.log(str[i]);
+    console.log(str[str.length - (i + 1)]);
+    if(str[i] !== str[str.length - (i + 1)]) {
+      return false;
+    }
   }
-}
 return true;
 }
+
 // Function Call
 isPalindrome("racecar"); //function call
 
