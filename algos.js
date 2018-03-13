@@ -2,6 +2,43 @@
 // All solutions are written in Javascript 
 
 
+// ProjectEuler.net Question #1
+// Find sum of all multiples of 3 and 5 from 0 - 1000.
+function multiplesof3and5() {
+  var sum = 0;
+  for(var i = 1; i < 1000; i++) {
+    if(i % 3 === 0 || i % 5 === 0) {
+      sum += i;
+    }
+  }
+  return(sum);
+}
+
+multiplesof3and5(); // Function Call
+
+
+// ProjectEuler.net Question #2
+// Find sum of all even numbers using Fibonacci sequence.
+function fibSum() {
+  var placeholder1 = 1;
+  var placeholder2 = 2;
+  var current;
+  var sum = 0;
+  for(var i = 0; i < 9; i++) {
+    current = placeholder1 + placeholder2;
+    placeholder1 = placeholder2;
+    placeholder2 = current;
+    if(current % 2 === 0) {
+      sum += current;
+    }
+  }
+  return sum;
+}
+
+fibSum(); // Function Call
+
+
+
 // Create a Single Linked List 
 function SLL() {
   this.head = null;
