@@ -21,16 +21,17 @@ multiplesof3and5(); // Function Call
 // Find sum of all even numbers using Fibonacci sequence.
 function fibSum() {
   var placeholder1 = 1;
-  var placeholder2 = 2;
-  var current;
+  var placeholder2 = 1;
+  var current = 0;
   var sum = 0;
-  for(var i = 0; i < 9; i++) {
+  while(current <= 4000000) {
     current = placeholder1 + placeholder2;
     placeholder1 = placeholder2;
     placeholder2 = current;
     if(current % 2 === 0) {
       sum += current;
     }
+    
   }
   return sum;
 }
@@ -331,30 +332,26 @@ RomeInt("MMMMMDCCLXXVIII"); //function call
 //Return boolean if there is a balance point in a given array. Balance point is where the sum of one side of the array equals the sum of the other side.
 
 function balancePoint(arr) {
-  var sum = 0;
-  var sum2 = arr[0];
-  for (var i = 1; i < arr.length; i++) {
-    sum += arr[i];
-    console.log("sum is now", sum)
+  var leftSum = arr[0];
+  var rightSum = 0;
+  
+  for(var i = 1; i < arr.length; i++) {
+    rightSum += arr[i];
   }
-  if (sum === sum2) {
+  if(leftSum === rightSum) {
     return true;
   }
-  if (sum !== sum2) {
-    for (var k = 1; k < arr.length - 1; k++) {
-      sum2 += arr[k];
-      sum -= arr[k];
-      console.log("sum2 is now", sum2)
-      console.log("sum is right now", sum)
-      if (sum === sum2) {
-        return true;
-      }
+  
+  for(var j = 1; j < arr.length - 1; j++) {
+    rightSum -= arr[j];
+    leftSum += arr[j];
+    if(leftSum === rightSum) {
+      return true;
     }
   }
-
   return false;
-
 }
+balancePoint([1, 2, 3, 4, 10]); // Function Call
 // function call
 balancePoint([1, 1])
 
