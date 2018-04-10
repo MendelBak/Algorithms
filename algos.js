@@ -39,6 +39,57 @@ function fibSum() {
 fibSum(); // Function Call
 
 
+// Create a Binary Search Tree
+// THIS DOES NOT FUNCTION PROPERLY!! NEEDS WORK!
+function BST() {
+  this.root = null;
+  
+  function Node(val) {
+    this.node = val;
+    this.right = null;
+    this.left = null;
+  }
+  
+  this.add = function(val) {
+    var root = this.root;
+    
+    if(!root) {
+      this.root = new Node(val);
+      return this;
+    }
+    
+    var currentNode = this.root;
+    var newNode = new Node(val);
+    
+    while(currentNode) {
+      if(newNode.value <= currentNode.value) {
+        if(!currentNode.left) {
+          currentNode.left = newNode;
+          return this;
+      } else {
+        currentNode = currentNode.left;
+        return this;
+      }
+    }
+    else {
+      if(!currentNode.right) {
+        currentNode.right = newNode;
+        return this;
+      } else {
+        currentNode = currentNode.right;
+        return this;
+      }
+    }
+  }
+  return this;
+}
+}
+
+var myBST = new BST();
+myBST.add(13).add(7)add(12);
+// End BST
+
+
 
 // Create a Single Linked List 
 function SLL() {
@@ -145,7 +196,7 @@ function SLL() {
     else{
     console.log('No node was removed.');
     return this;
-    }
+    } 
     return this;
   }
 
