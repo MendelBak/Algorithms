@@ -38,104 +38,104 @@ function fibSum() {
 fibSum(); // Function Call
 
 
-// Create Binary Search Tree and Add New Node. (Equal values insert to the left side).function BST() {
-this.root = null;
-
-function Node(val) {
-  this.value = val;
-  this.right = null;
-  this.left = null;
-}
-
-// Adds a new node to the BST. Does not reorder nodes but appends the new node to the end of the BST following the standard BST chain of logic (placed on right or left side depending on the previous node value compared to new node value).
-
-this.add = function (val) {
-  let root = this.root;
-
-  if (!root) {
-    this.root - new Node(val);
-    return this;
+// Create Binary Search Tree and Add New Node. (Equal values insert to the left side).
+function BST() {
+  this.root = null;
+  
+  function Node(val) {
+    this.value = val;
+    this.right = null;
+    this.left = null;
   }
-
-  let currentNode = this.root;
-  const newNode = new Node(val);
-
-  while (currentNode) {
-    if (newNode.value <= currentNode.value) {
-      if (!currentNode.left) {
-        currentNode.left = newNode;
-        return this;
-      } else {
-        currentNode = currentNode.left;
+  
+  // Adds a new node to the BST. Does not reorder nodes but appends the new node to the end of the BST following the standard BST chain of logic (placed on right or left side depending on the previous node value compared to new node value).
+  
+  this.add = function (val) {
+    let root = this.root;
+  
+    if (!root) {
+      this.root - new Node(val);
+      return this;
+    }
+  
+    let currentNode = this.root;
+    const newNode = new Node(val);
+  
+    while (currentNode) {
+      if (newNode.value <= currentNode.value) {
+        if (!currentNode.left) {
+          currentNode.left = newNode;
+          return this;
+        } else {
+          currentNode = currentNode.left;
+        }
+      }
+      if (newNode.value > currentNode.value) {
+        if (!currentNode.right) {
+          currentNode.right = newnode;
+          return this;
+        } else {
+          currentNode = currentNode.right;
+        }
       }
     }
-    if (newNode.value > currentNode.value) {
-      if (!currentNode.right) {
-        currentNode.right = newnode;
-        return this;
-      } else {
-        currentNode = currentNode.right;
+  };
+  
+  // Inserts a new node to the BST while ensuring the node is in the correct position based on its numerical value. (reorders *only* conflicting BST nodes to place new node in proper numerical location).
+  this.insert = function (val) {
+    let root = this.root;
+  
+    if (!root) {
+      this.root = new Node(val);
+      console.log(`A root has been defined for your BST with a value of ${val}.`);
+      return this;
+    }
+  
+    let currentNode = this.root;
+    const newNode = new Node(val);
+  
+    while (currentNode) {
+      if (newNode.value <= currentNode.value) {
+        if (!currentNode.left) {
+          currentNode.left = newNode;
+          return this;
+        } else if (
+          newNode.value <= currentNode.value &&
+          newNode.value > currentNode.left.value
+        ) {
+          let temp = currentNode.left;
+          currentNode.left = newNode;
+          newNode.left = temp;
+          return this;
+        } else {
+          currentNode = currentNode.left;
+        }
+      }
+      if (newNode.value > currentNode.value) {
+        if (!currentNode.right) {
+          currentNode.right = newNode;
+          return this;
+        } else if (
+          newNode.value > currentNode.value &&
+          newNode.value < currentNode.right.value
+        ) {
+          let temp = currentNode.right;
+          currentNode.right = newNode;
+          newNode.right = temp;
+          return this;
+        } else {
+          currentNode = currentNode.right;
+        }
       }
     }
+    console.log(`A new node with the value of {val} has been inserted in the BST in a position that corresponds to its numerical value.`);
+  };
+  console.log("A new BST has been created with a null root and no nodes.");
   }
-}
-
-// Inserts a new node to the BST while ensuring the node is in the correct position based on its numerical value. (reorders *only* conflicting BST nodes to place new node in proper numerical location).
-this.insert = function (val) {
-  let root = this.root;
-
-  if (!root) {
-    this.root = new Node(val);
-    console.log(`A root has been defined for your BST with a value of ${val}.`);
-    return this;
-  }
-
-  let currentNode = this.root;
-  const newNode = new Node(val);
-
-  while (currentNode) {
-    if (newNode.value <= currentNode.value) {
-      if (!currentNode.left) {
-        currentNode.left = newNode;
-        return this;
-      } else if (
-        newNode.value <= currentNode.value &&
-        newNode.value > currentNode.left.value
-      ) {
-        let temp = currentNode.left;
-        currentNode.left = newNode;
-        newNode.left = temp;
-        return this;
-      } else {
-        currentNode = currentNode.left;
-      }
-    }
-    if (newNode.value > currentNode.value) {
-      if (!currentNode.right) {
-        currentNode.right = newNode;
-        return this;
-      } else if (
-        newNode.value > currentNode.value &&
-        newNode.value < currentNode.right.value
-      ) {
-        let temp = currentNode.right;
-        currentNode.right = newNode;
-        newNode.right = temp;
-        return this;
-      } else {
-        currentNode = currentNode.right;
-      }
-    }
-  }
-  console.log(`A new node with the value of {val} has been inserted in the BST in a position that corresponds to its numerical value.`);
-}
-console.log("A new BST has been created with a null root and no nodes.");
-}
-
-const myBST = new BST();
-
-myBST.insert(7);
-// End BST
+  
+  const myBST = new BST();
+  myBST.insert(7);
+  // End BST
 
 
 
@@ -165,7 +165,7 @@ function SLL() {
       console.log("You've successfully created a new node.");
     }
     return this;
-  }
+  };
 
 
   // Create a function, inside the SLL create function, that checks if the SLL contains a specific value (user submitted).
@@ -182,7 +182,7 @@ function SLL() {
     }
     console.log('You have not passed in a proper Single Linked List into the SLLContains function.');
     return false;
-  }
+  };
 
 
   // Return the length of a Single Linked List.
@@ -190,14 +190,17 @@ function SLL() {
     if (this.head) {
       var walker = this.head;
       count = 1;
-    }
     while (walker.next) {
       count++;
       walker = walker.next;
     }
     console.log(`You have ${count} node(s) in your Single Linked List`);
     return this;
-  }
+    }
+    else {
+      console.log("The SLL you passed to the countLength function does not have a head or nodes.");
+    }
+  };
 
 
   // Print all values contained in a Single Linked List.
@@ -208,7 +211,7 @@ function SLL() {
       console.log(`The value of node #${printCounter} is ${walker.value}`);
       while (walker.next) {
         walker = walker.next;
-        printCounter++
+        printCounter++;
         console.log(`The value of node #${printCounter} is ${walker.value}`);
       }
     } else {
@@ -216,7 +219,7 @@ function SLL() {
       return undefined;
     }
     return this;
-  }
+  };
 
 
   // Remove a node if it contains a specific, passed in, value.
@@ -242,12 +245,13 @@ function SLL() {
       return this;
     }
     return this;
-  }
+  };
 
   // Bracket below is the ending bracket for the SLL creation function.
   console.log("Successfully created an empty Single Linked List. It does not yet have a head or nodes.");
 }
 
+// Function calls
 var mySLL = new SLL();
 mySLL.add(13).add(613);
 mySLL.countLength();
@@ -255,7 +259,6 @@ mySLL.SLLContains(13);
 mySLL.printVals();
 mySLL.remove(613);
 mySLL.printVals();
-
 //End SLL
 
 
@@ -339,7 +342,7 @@ function approximateFtoCConversion(num, tempType) {
     return `${num} degrees Fahrenheit is ${Math.round(((num - 32) / 1.8) * 100) / 100} Celsius`;
   } 
   else if(tempType == "C" || tempType == "c") {
-    return `${num} degrees Celsius is ${Math.round((num * 1.8 + 32) * 100) / 100} Fahrenheit` 
+    return `${num} degrees Celsius is ${Math.round((num * 1.8 + 32) * 100) / 100} Fahrenheit`;
   }
 }
 // Function call
@@ -403,7 +406,7 @@ function add_num(x, y) {
 function Curry(callback, ingredient) {
   return (y) => {
     return callback(ingredient, y);
-  }
+  };
 }
 
 var add1 = Curry(add_num, 5);
