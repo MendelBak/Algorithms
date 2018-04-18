@@ -31,7 +31,6 @@ function fibSum() {
     if (current % 2 === 0) {
       sum += current;
     }
-
   }
   return sum;
 }
@@ -260,8 +259,6 @@ mySLL.printVals();
 //End SLL
 
 
-
-
 // Recursively return the factorial of a user inputted number.
 function rFactorial(num, i = num - 1, newNum = num * i) {
   console.log("num is ->", num);
@@ -313,7 +310,40 @@ function rNoNeg(arr, i = 0, newArr = []) {
 // Function Call
 rNoNeg([1, 2, -4, 8, -30]);
 
+// Given two numbers, return array of length num1 with each value num2. Print "Jinx" if they are the same.
+// Note: Does not work with negative numbers, obviously.
+function twoVals(val1, val2) {
+  // This performs type checking on the submitted variables. Kinda clever, actually.
+  if(Math.floor(val1) !== val1 || Math.floor(val2) !== val2) {
+    return "Please provide a number.";
+  }
+  const newArr = [];
+  for(var i = 0; i < val1; i++) {
+    if(val1 === val2) {
+      newArr.push("Jinx");
+    }
+    else {
+    newArr.push(val2);
+    }
+  }
+  return newArr;
+}
+// Function call
+twoVals(1, 1);
 
+
+// Simple F to C and C to F converter
+function approximateFtoCConversion(num, tempType) {
+  if(tempType == "F" || tempType == "f") {
+    // Math.round ensures that two decimals are displayed.
+    return `${num} degrees Fahrenheit is ${Math.round(((num - 32) / 1.8) * 100) / 100} Celsius`;
+  } 
+  else if(tempType == "C" || tempType == "c") {
+    return `${num} degrees Celsius is ${Math.round((num * 1.8 + 32) * 100) / 100} Fahrenheit` 
+  }
+}
+// Function call
+approximateFtoCConversion(32, "F");
 
 // Function checks if a passed in number is divisible by 4 and 6. It uses two callbacks to deliver an error or success message.
 function errorHandler(num) {
@@ -447,7 +477,7 @@ function balancePoint(arr) {
   return false;
 }
 balancePoint([1, 2, 3, 4, 10]); // Function Call
-// function call
+// Function call
 balancePoint([1, 1]);
 
 //Flatten Array. Given an array that contains arrays inside, remove the items from the subarray and place them in a new array.
@@ -465,7 +495,7 @@ function flattenArr(arr) {
   }
   return newArr;
 }
-
+// Function call
 flattenArr([1, 9, [7, 3, 4], 8, [3]]);
 
 // Reduce Array: takes an array and a callback function and returns the result.
@@ -487,17 +517,15 @@ function reduce(arr, callback) {
   var results = 0;
   results = callback(arr[0], arr[1]);
   for (let i = 2; i < arr.length; i++) {
-
     results = callback(arr[i], results);
-
   }
   return results;
 }
+// Function call
 reduce([2, 2, 2, 2], multiply);
 
 
 // Filter Array. Runs a callback on each element in the array, if the result of the callback is false, remove the element from the array.
-
 // This is the callback function used below.
 function isEven(num) {
   if (num % 2 === 0) {
@@ -517,5 +545,5 @@ function filterArr(arr, callback) {
   }
   return newArr;
 }
-
+// Function call
 filterArr([1, 2, 3, 4], isEven);
