@@ -502,6 +502,26 @@ balancePoint([1, 2, 3, 4, 10]); // Function Call
 // Function call
 balancePoint([1, 1]);
 
+// Reverses a given array. Does so without iterating through each item multiple times (not Bubble Sort derived).
+function reverseArray(arr) {
+  let i;
+  let j = arr.length - 1;
+  let temp1;
+  
+  for(i = 0; i < Math.floor(arr.length / 2); i++) {
+    console.log(`j is ${j}. i is ${i}. Array is ${arr}`);
+    temp1 = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp1;
+    j--;
+  }
+  console.log(Math.floor(arr.length / 2));
+    return arr;
+}
+// Function call
+reverseArray([0,1,2,3,4,5,6]);
+
+
 //Flatten Array. Given an array that contains arrays inside, remove the items from the subarray and place them in a new array.
 function flattenArr(arr) {
   var newArr = [];
