@@ -261,6 +261,25 @@ mySLL.remove(613);
 mySLL.printVals();
 //End SLL
 
+// This function allows a user to input an index value (non zero indexed for ease of user use) and receives the correct value from the fibonacci sequence.
+function findInFib(num) {
+  let big = 1;
+  let small = 1;
+  let temp;
+  let count = 2;
+  while(count < num) {
+    temp = big;
+    big += small;
+    small = temp;
+    count++
+    console.log(count, small, big);
+  }
+  return big;
+  
+}
+
+findInFib(10);
+
 
 // Recursively return the factorial of a user inputted number.
 function rFactorial(num, i = num - 1, newNum = num * i) {
