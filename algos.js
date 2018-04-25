@@ -502,6 +502,48 @@ balancePoint([1, 2, 3, 4, 10]); // Function Call
 // Function call
 balancePoint([1, 1]);
 
+
+// Takes a number that represents a number of US cents and returns the optimal number of US coins to return. This is not a great implementation. I believe there is a better way to do this. Can be easily modified to allow input of numbers greater than 99 cents (whole dollars + cents).
+function coinChange(change) {
+  if(Math.floor(change) !== change) {
+    return "Please input a whole number";
+  }
+  if(change > 99) {
+    return "Change due must be less than one whole dollar. Please input a number between 1 and 99.";
+  }
+  const q = 25;
+  const d = 10;
+  const n = 5;
+  const p = 1;
+  let qCount = 0;
+  let dCount = 0;
+  let nCount = 0;
+  let pCount = 0;
+  let totalChange = 0;
+  
+  while(totalChange < change) {
+    while(totalChange + q <= change) {
+      totalChange += q;
+      qCount++;
+    }
+    while(totalChange + d <= change) {
+      totalChange += d;
+      dCount++
+    }
+    while(totalChange + n <= change) {
+      totalChange += n;
+      nCount++;
+    }
+    while(totalChange + p <= change) {
+      totalChange += p;
+      pCount++;
+    }
+  }
+  return `Quarters ${qCount}, Dimes ${dCount}, Nickels ${nCount}, Pennies ${pCount}, Total Change Due $0.${totalChange}`;
+}
+// Function call
+coinChange(97);
+
 //Flatten Array. Given an array that contains arrays inside, remove the items from the subarray and place them in a new array.
 function flattenArr(arr) {
   var newArr = [];
