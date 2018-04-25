@@ -41,26 +41,26 @@ fibSum(); // Function Call
 // Create Binary Search Tree and Add New Node. (Equal values insert to the left side).
 function BST() {
   this.root = null;
-  
+
   function Node(val) {
     this.value = val;
     this.right = null;
     this.left = null;
   }
-  
+
   // Adds a new node to the BST. Does not reorder nodes but appends the new node to the end of the BST following the standard BST chain of logic (placed on right or left side depending on the previous node value compared to new node value).
-  
+
   this.add = function (val) {
     let root = this.root;
-  
+
     if (!root) {
       this.root - new Node(val);
       return this;
     }
-  
+
     let currentNode = this.root;
     const newNode = new Node(val);
-  
+
     while (currentNode) {
       if (newNode.value <= currentNode.value) {
         if (!currentNode.left) {
@@ -80,20 +80,20 @@ function BST() {
       }
     }
   };
-  
+
   // Inserts a new node to the BST while ensuring the node is in the correct position based on its numerical value. (reorders *only* conflicting BST nodes to place new node in proper numerical location).
   this.insert = function (val) {
     let root = this.root;
-  
+
     if (!root) {
       this.root = new Node(val);
       console.log(`A root has been defined for your BST with a value of ${val}.`);
       return this;
     }
-  
+
     let currentNode = this.root;
     const newNode = new Node(val);
-  
+
     while (currentNode) {
       if (newNode.value <= currentNode.value) {
         if (!currentNode.left) {
@@ -131,11 +131,11 @@ function BST() {
     console.log(`A new node with the value of {val} has been inserted in the BST in a position that corresponds to its numerical value.`);
   };
   console.log("A new BST has been created with a null root and no nodes.");
-  }
-  
-  const myBST = new BST();
-  myBST.insert(7);
-  // End BST
+}
+
+const myBST = new BST();
+myBST.insert(7);
+// End BST
 
 
 
@@ -143,44 +143,55 @@ function BST() {
 function SLL() {
   this.head = null;
 
-
-  // Create a Single Linked List.
+  // Node creation.
   function Node(val) {
     this.value = val;
     this.next = null;
   }
 
-  // Add a node to the end of a Single Linked List.
+  // Adds a node to the end of a Single Linked List.
   this.add = function (val) {
     if (!this.head) {
       this.head = new Node(val);
       console.log("You've successfully created a new node.");
-    } else {
-      var walker = this.head;
-      while (walker.next) {
-        walker = walker.next;
-      }
-      var node = new Node(val);
-      walker.next = node;
-      console.log("You've successfully created a new node.");
     }
+    let walker = this.head;
+    while (walker.next) {
+      walker = walker.next;
+    }
+    const newNode = new Node(val);
+    walker.next = newNode;
+    console.log("You've successfully created a new node.");
     return this;
   };
 
-
-  // Create a function, inside the SLL create function, that checks if the SLL contains a specific value (user submitted).
-  this.SLLContains = function (checkVal) {
-    var walker = this.head;
-    while (walker) {
-      if (walker.value === checkVal) {
-        console.log(`The value ${checkVal} is contained in this Single Linked List`);
-        return this;
-      } else {
-        console.log(`The value ${checkVal} is not contained in this Single Linked List`);
-        return this;
-      }
+  // Adds a node the the front of the SLL.
+  this.addFront = function (val) {
+    if (!this.head) {
+      this.head = new Node(val);
+      return this;
     }
-    console.log('You have not passed in a proper Single Linked List into the SLLContains function.');
+    const newNode = new Node(val);
+    newNode.next = this.head;
+    this.head = newNode;
+    return this;
+  };
+
+  // Checks if the SLL contains a specific value (user submitted).
+  this.contains = function (val) {
+    if (!this.head) {
+      console.log(`This Single Linked List does not have any nodes. ("Contains" Function")`);
+      return false;
+    }
+    let walker = this.head;
+    while (walker.next) {
+      if (walker.value === val || walker.next.value === val) {
+        console.log(`The value "${val}" was found in the Single Linked List.`);
+        return true;
+      }
+      walker = walker.next;
+    }
+    console.log(`The value "${val}" is not contained in this Single Linked List.`);
     return false;
   };
 
@@ -190,12 +201,12 @@ function SLL() {
     if (this.head) {
       var walker = this.head;
       count = 1;
-    while (walker.next) {
-      count++;
-      walker = walker.next;
-    }
-    console.log(`You have ${count} node(s) in your Single Linked List`);
-    return this;
+      while (walker.next) {
+        count++;
+        walker = walker.next;
+      }
+      console.log(`You have ${count} node(s) in your Single Linked List`);
+      return this;
     }
     else {
       console.log("The SLL you passed to the countLength function does not have a head or nodes.");
@@ -218,6 +229,17 @@ function SLL() {
       console.log('You have not passed in a proper Single Linked List into the printVals function');
       return undefined;
     }
+    return this;
+  };
+
+  // Removes the head node from the SLL.
+  this.removeHead = function () {
+    if (!this.head) {
+      console.log(`This Single Linked List does not contain any nodes. ("removeHead" Function)`);
+      return false;
+    }
+    this.head = this.head.next;
+    console.log("The head node was removed from this Single Linked List.");
     return this;
   };
 
@@ -255,7 +277,7 @@ function SLL() {
 var mySLL = new SLL();
 mySLL.add(13).add(613);
 mySLL.countLength();
-mySLL.SLLContains(13);
+mySLL.contains(13);
 mySLL.printVals();
 mySLL.remove(613);
 mySLL.printVals();
@@ -267,7 +289,7 @@ function findInFib(num) {
   let small = 1;
   let temp;
   let count = 2;
-  while(count < num) {
+  while (count < num) {
     temp = big;
     big += small;
     small = temp;
@@ -275,7 +297,7 @@ function findInFib(num) {
     console.log(count, small, big);
   }
   return big;
-  
+
 }
 
 findInFib(10);
@@ -336,16 +358,16 @@ rNoNeg([1, 2, -4, 8, -30]);
 // Note: Does not work with negative numbers, obviously.
 function twoVals(val1, val2) {
   // This performs type checking on the submitted variables. Kinda clever, actually.
-  if(Math.floor(val1) !== val1 || Math.floor(val2) !== val2) {
+  if (Math.floor(val1) !== val1 || Math.floor(val2) !== val2) {
     return "Please provide a number.";
   }
   const newArr = [];
-  for(var i = 0; i < val1; i++) {
-    if(val1 === val2) {
+  for (var i = 0; i < val1; i++) {
+    if (val1 === val2) {
       newArr.push("Jinx");
     }
     else {
-    newArr.push(val2);
+      newArr.push(val2);
     }
   }
   return newArr;
@@ -356,11 +378,11 @@ twoVals(1, 1);
 
 // Simple F to C and C to F converter
 function approximateFtoCConversion(num, tempType) {
-  if(tempType == "F" || tempType == "f") {
+  if (tempType == "F" || tempType == "f") {
     // Math.round ensures that two decimals are displayed.
     return `${num} degrees Fahrenheit is ${Math.round(((num - 32) / 1.8) * 100) / 100} Celsius`;
-  } 
-  else if(tempType == "C" || tempType == "c") {
+  }
+  else if (tempType == "C" || tempType == "c") {
     return `${num} degrees Celsius is ${Math.round((num * 1.8 + 32) * 100) / 100} Fahrenheit`;
   }
 }
@@ -505,10 +527,10 @@ balancePoint([1, 1]);
 
 // Takes a number that represents a number of US cents and returns the optimal number of US coins to return. This is not a great implementation. I believe there is a better way to do this. Can be easily modified to allow input of numbers greater than 99 cents (whole dollars + cents).
 function coinChange(change) {
-  if(Math.floor(change) !== change) {
+  if (Math.floor(change) !== change) {
     return "Please input a whole number";
   }
-  if(change > 99) {
+  if (change > 99) {
     return "Change due must be less than one whole dollar. Please input a number between 1 and 99.";
   }
   const q = 25;
@@ -520,21 +542,21 @@ function coinChange(change) {
   let nCount = 0;
   let pCount = 0;
   let totalChange = 0;
-  
-  while(totalChange < change) {
-    while(totalChange + q <= change) {
+
+  while (totalChange < change) {
+    while (totalChange + q <= change) {
       totalChange += q;
       qCount++;
     }
-    while(totalChange + d <= change) {
+    while (totalChange + d <= change) {
       totalChange += d;
       dCount++
     }
-    while(totalChange + n <= change) {
+    while (totalChange + n <= change) {
       totalChange += n;
       nCount++;
     }
-    while(totalChange + p <= change) {
+    while (totalChange + p <= change) {
       totalChange += p;
       pCount++;
     }
@@ -548,8 +570,8 @@ function reverseArray(arr) {
   let i;
   let j = arr.length - 1;
   let temp1;
-  
-  for(i = 0; i < Math.floor(arr.length / 2); i++) {
+
+  for (i = 0; i < Math.floor(arr.length / 2); i++) {
     console.log(`j is ${j}. i is ${i}. Array is ${arr}`);
     temp1 = arr[i];
     arr[i] = arr[j];
@@ -557,10 +579,10 @@ function reverseArray(arr) {
     j--;
   }
   console.log(Math.floor(arr.length / 2));
-    return arr;
+  return arr;
 }
 // Function call
-reverseArray([0,1,2,3,4,5,6]);
+reverseArray([0, 1, 2, 3, 4, 5, 6]);
 
 
 //Flatten Array. Given an array that contains arrays inside, remove the items from the subarray and place them in a new array.
