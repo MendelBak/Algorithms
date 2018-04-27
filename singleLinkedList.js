@@ -166,3 +166,32 @@ var mySLL = new SLL();
 mySLL.add(1).addFront(2).countLength();
 
 
+// Separate functions that apply to SLLs.
+
+
+// Returns a copy of a given SLL. 
+// Should work properly but needs some more testing to ensure.
+function copySLL(SLLToBeCopied) {
+    if(!SLLToBeCopied.head) {
+      return false;
+    }
+    let walker1 = SLLToBeCopied.head;
+    let newSLL = new SLL();
+    newSLL.head = walker1;
+    let walker2 = newSLL.head;
+    while(walker1.next) {
+      walker1 = walker1.next;
+      walker2.next = walker1;
+      walker2 = walker2.next;
+    }
+    return newSLL;
+  }
+
+// Create a SLL using above SLL() function.
+var mySLL = new SLL();
+// Add nodes to the original SLL.
+mySLL.add(1).add(2).add(4);
+// Create a new variable and run the copySLL() function while passing the original SLL as an argument.
+var SLL2 = new copySLL(mySLL);
+// Verify that the copy is correct.
+SLL2.printNodes()
