@@ -21,8 +21,8 @@ function insertionSort(arr) {
 insertionSort([7, 613, 770, 3, 1, 4, -1, -7, 0, 0, 0, 613]);
 
 // Incomplete Merge Sort Function
-function mergeSort(arr, sort = false) {
-    if (arr.length > 1 && sort === false) {
+function mergeSort(arr) {
+    if (arr.length > 1) {
         let left = arr.splice(0, Math.floor(arr.length / 2));
         let right = arr;
         if (left.length > 1) {
