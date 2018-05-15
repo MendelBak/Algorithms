@@ -138,6 +138,20 @@ myBST.insert(7);
 // End BST
 
 
+// Recursive Fibbonacci Function
+function rFib(target, temp, prevSum = 0, sum = 1, current = 2) {
+  if (current > target) {
+    return sum;
+  }
+  temp = sum;
+  sum += prevSum;
+  prevSum = temp;
+  current++;
+  return rFib(target, temp, prevSum, sum, current);
+}
+
+rFib(21);
+
 
 
 // This function allows a user to input an index value (non zero indexed for ease of user use) and receives the correct value from the fibonacci sequence.
@@ -160,21 +174,30 @@ function findInFib(num) {
 findInFib(10);
 
 
-// Recursively return the factorial of a user inputted number.
-function rFactorial(num, i = num - 1, newNum = num * i) {
-  console.log("num is ->", num);
-  console.log("i is ->", i);
-  console.log("newNum is ->", newNum);
-  if (i < 2) {
-    return newNum;
-  } else {
-    i--;
-    newNum *= i;
+// Recursively return the factorial of a number.
+function rFactorial(num, sum = 1, current = 2) {
+  if(current > num) {
+    return sum;
   }
-  rFactorial(num, i, newNum);
+  sum *= current;
+  current++;
+  return rFactorial(num, sum, current);
 }
 // Function Call
-rFactorial(5);
+rFactorial(4);
+
+
+// Recursively return the Sigma value of a number
+function rSigma(num, sum = 1, current = 2) {
+  if(current > num) {
+    return sum;
+  }
+  sum += current;
+  current++;
+  return rSigma(num, sum, current);
+}
+// Function Call
+rSigma(5);
 
 
 // Recursive function that returns Max, Min, and Avg from a user inputted array. (ES6 syntax)
