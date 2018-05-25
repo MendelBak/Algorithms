@@ -2,6 +2,60 @@
 // All solutions are written in Javascript 
 
 
+// Recursively finds index of first unique letter in a string. (empty space counts as a unique character)
+// Case insensitive
+function rIdxOfFirstUniqueLetter(string, idx = 1, current = 0, found = false) {
+  if (current >= string.length) {
+    return false;
+  }
+  if (idx >= string.length) {
+    if (found === true) {
+      current++;
+      idx = 0;
+      found = false;
+    } else {
+      // sucess
+      return current;
+    }
+  } else if (string[current].toUpperCase() === string[idx].toUpperCase() && current !== idx) {
+    found = true;
+    idx++;
+  } else {
+    idx++;
+  }
+  return rIdxOfFirstUniqueLetter(string, idx, current, found);
+}
+// Function Call
+rIdxOfFirstUniqueLetter("aABbc");
+
+// Find all the unique letters in a string and return them in a new string. 
+// Case insensitive
+function findUniqueLetters(string) {
+  let current = 0;
+  let idx = 1;
+  let uniqueLetters = "";
+  let unique = true;
+  for (current; current <= string.length - 1; current++) {
+    // reset these values to check the whole string one more after a loop has finished.
+    idx = 0;
+    unique = true;
+    for (idx; idx <= string.length - 1; idx++) {
+      if (string[idx].toUpperCase() === string[current].toUpperCase() && idx !== current) {
+        unique = false;
+        // This stops it from searching the rest of the string since we already know that it's not unique.
+        idx = string.length - 1;
+      }
+    }
+    if (unique === true) {
+      uniqueLetters += string[current];
+    }
+  }
+  return uniqueLetters;
+}
+// Function call
+findUniqueLetters("Aa bV Bv");
+
+
 // ProjectEuler.net Question #1
 // Find sum of all multiples of 3 and 5 from 0 - 1000.
 function multiplesof3and5() {
@@ -176,7 +230,7 @@ findInFib(10);
 
 // Recursively return the factorial of a number.
 function rFactorial(num, sum = 1, current = 2) {
-  if(current > num) {
+  if (current > num) {
     return sum;
   }
   sum *= current;
@@ -189,7 +243,7 @@ rFactorial(4);
 
 // Recursively return the Sigma value of a number
 function rSigma(num, sum = 1, current = 2) {
-  if(current > num) {
+  if (current > num) {
     return sum;
   }
   sum += current;
