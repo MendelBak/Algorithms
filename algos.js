@@ -104,36 +104,29 @@ function BST() {
 
   // Adds a new node to the BST. Does not reorder nodes but appends the new node to the end of the BST following the standard BST chain of logic (placed on right or left side depending on the previous node value compared to new node value).
 
-  this.add = function (val) {
-    let root = this.root;
+  	this.add = function(val) {
+		if (!this.root) {
+			this.root = new Node(val);
+			return this;
+		}
+		let walker = this.root;
+		while (true) {
+			if (val >= walker.value && walker.right) {
+				walker = walker.right;
+			} else if (val >= walker.value && !walker.right) {
+				walker.right = new Node(val);
+				return this;
+			}
 
-    if (!root) {
-      this.root - new Node(val);
-      return this;
-    }
+			if (val < walker.value && walker.left) {
+				walker = walker.left;
+			} else if (val < walker.value && !walker.left) {
+				walker.left = new Node(val);
+				return this;
+			}
+		}
+	};
 
-    let currentNode = this.root;
-    const newNode = new Node(val);
-
-    while (currentNode) {
-      if (newNode.value <= currentNode.value) {
-        if (!currentNode.left) {
-          currentNode.left = newNode;
-          return this;
-        } else {
-          currentNode = currentNode.left;
-        }
-      }
-      if (newNode.value > currentNode.value) {
-        if (!currentNode.right) {
-          currentNode.right = newnode;
-          return this;
-        } else {
-          currentNode = currentNode.right;
-        }
-      }
-    }
-  };
 
   // Inserts a new node to the BST while ensuring the node is in the correct position based on its numerical value. (reorders *only* conflicting BST nodes to place new node in proper numerical location).
   this.insert = function (val) {
@@ -187,8 +180,9 @@ function BST() {
   console.log("A new BST has been created with a null root and no nodes.");
 }
 
-const myBST = new BST();
-myBST.insert(7);
+
+var MyBST = new BST();
+MyBST.add(770);
 // End BST
 
 
