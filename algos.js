@@ -91,7 +91,6 @@ function fibSum() {
 
 fibSum(); // Function Call
 
-
 // Create Binary Search Tree and Add New Node. (Equal values insert to the left side).
 function BST() {
 	this.root = null;
@@ -137,6 +136,8 @@ function BST() {
 	};
 
 	// Inserts a new node to the BST while ensuring the node is in the correct position based on its numerical value. (reorders *only* conflicting BST nodes to place new node in proper numerical location).
+
+	// WARNING! Console.log messages are not working when inserting values that are less than the root value, for some reason.
 	this.insert = function(val) {
 		let root = this.root;
 
@@ -169,8 +170,7 @@ function BST() {
 				} else {
 					currentNode = currentNode.left;
 				}
-			}
-			else if (newNode.value > currentNode.value) {
+			} else if (newNode.value > currentNode.value) {
 				if (!currentNode.right) {
 					currentNode.right = newNode;
 					console.log(
@@ -193,12 +193,40 @@ function BST() {
 		}
 	};
 	console.log('A new BST has been created with a null root and no nodes.');
+
+	// This outer function calls the inner function recursively which counts the total number of nodes in the BST.
+	this.outerCountNodes = function() {
+		let numNodes = 0;
+		let current = this.root;
+
+		// The original function call, which calls the function (rCountNodes) defined below.
+		numNodes = rCountNodes(current, numNodes);
+
+		function rCountNodes(current, numNodes) {
+			// Break condition
+			if (current === null) {
+				return numNodes;
+			} else {
+				numNodes++;
+
+				// The recursive function calls occur here.
+				// We pass zero to the numNodes parameter to prevent numNodes from increasing exponentially as the recursion progresses.
+				numNodes += rCountNodes(current.right, 0);
+				numNodes += rCountNodes(current.left, 0);
+				return numNodes;
+			}
+		}
+
+		// After the recursive function calls finish, console log and return the final value.
+		console.log(`The total number of nodes in your BST is ${numNodes}`);
+		return numNodes;
+	};
 }
 
 var MyBST = new BST();
-MyBST.insert(613).insert(600).insert(500).insert(400).insert(555).insert(777);
+MyBST.add(770).add(613).insert(666).insert(666).insert(777).insert(888);
+MyBST.outerCountNodes();
 // End BST
-
 
 
 // Recursive Fibbonacci Function
