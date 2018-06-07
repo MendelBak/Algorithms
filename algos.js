@@ -94,19 +94,22 @@ fibSum(); // Function Call
 
 // Create Binary Search Tree and Add New Node. (Equal values insert to the left side).
 function BST() {
-  this.root = null;
+	this.root = null;
 
-  function Node(val) {
-    this.value = val;
-    this.right = null;
-    this.left = null;
-  }
+	function Node(val) {
+		this.value = val;
+		this.right = null;
+		this.left = null;
+	}
 
-  // Adds a new node to the BST. Does not reorder nodes but appends the new node to the end of the BST following the standard BST chain of logic (placed on right or left side depending on the previous node value compared to new node value).
+	// Adds a new node to the BST. Does not reorder nodes but appends the new node to the end of the BST following the standard BST chain of logic (placed on right or left side depending on the previous node value compared to new node value).
 
-  	this.add = function(val) {
+	this.add = function(val) {
 		if (!this.root) {
 			this.root = new Node(val);
+			console.log(
+				`A root has been defined for your BST with a value of ${val}.`
+			);
 			return this;
 		}
 		let walker = this.root;
@@ -115,6 +118,9 @@ function BST() {
 				walker = walker.right;
 			} else if (val >= walker.value && !walker.right) {
 				walker.right = new Node(val);
+				console.log(
+					`A new node with the value of ${val} has been inserted at the end of your BST.`
+				);
 				return this;
 			}
 
@@ -122,68 +128,77 @@ function BST() {
 				walker = walker.left;
 			} else if (val < walker.value && !walker.left) {
 				walker.left = new Node(val);
+				console.log(
+					`A new node with the value of ${val} has been inserted at the end of your BST.`
+				);
 				return this;
 			}
 		}
 	};
 
+	// Inserts a new node to the BST while ensuring the node is in the correct position based on its numerical value. (reorders *only* conflicting BST nodes to place new node in proper numerical location).
+	this.insert = function(val) {
+		let root = this.root;
 
-  // Inserts a new node to the BST while ensuring the node is in the correct position based on its numerical value. (reorders *only* conflicting BST nodes to place new node in proper numerical location).
-  this.insert = function (val) {
-    let root = this.root;
+		if (!root) {
+			this.root = new Node(val);
+			console.log(
+				`A root has been defined for your BST with a value of ${val}.`
+			);
+			return this;
+		}
 
-    if (!root) {
-      this.root = new Node(val);
-      console.log(`A root has been defined for your BST with a value of ${val}.`);
-      return this;
-    }
+		let currentNode = this.root;
+		const newNode = new Node(val);
 
-    let currentNode = this.root;
-    const newNode = new Node(val);
-
-    while (currentNode) {
-      if (newNode.value <= currentNode.value) {
-        if (!currentNode.left) {
-          currentNode.left = newNode;
-          return this;
-        } else if (
-          newNode.value <= currentNode.value &&
-          newNode.value > currentNode.left.value
-        ) {
-          let temp = currentNode.left;
-          currentNode.left = newNode;
-          newNode.left = temp;
-          return this;
-        } else {
-          currentNode = currentNode.left;
-        }
-      }
-      if (newNode.value > currentNode.value) {
-        if (!currentNode.right) {
-          currentNode.right = newNode;
-          return this;
-        } else if (
-          newNode.value > currentNode.value &&
-          newNode.value < currentNode.right.value
-        ) {
-          let temp = currentNode.right;
-          currentNode.right = newNode;
-          newNode.right = temp;
-          return this;
-        } else {
-          currentNode = currentNode.right;
-        }
-      }
-    }
-    console.log(`A new node with the value of {val} has been inserted in the BST in a position that corresponds to its numerical value.`);
-  };
-  console.log("A new BST has been created with a null root and no nodes.");
+		while (currentNode) {
+			if (newNode.value <= currentNode.value) {
+				if (!currentNode.left) {
+					currentNode.left = newNode;
+					`A new node with the value of ${val} has been inserted in the BST in a position that corresponds to its numerical value.`;
+					return this;
+				} else if (
+					newNode.value <= currentNode.value &&
+					newNode.value > currentNode.left.value
+				) {
+					let temp = currentNode.left;
+					currentNode.left = newNode;
+					newNode.left = temp;
+					`A new node with the value of ${val} has been inserted in the BST in a position that corresponds to its numerical value.`;
+					return this;
+				} else {
+					currentNode = currentNode.left;
+				}
+			}
+			else if (newNode.value > currentNode.value) {
+				if (!currentNode.right) {
+					currentNode.right = newNode;
+					console.log(
+						`A new node with the value of ${val} has been inserted in the BST in a position that corresponds to its numerical value.`
+					);
+					return this;
+				} else if (
+					newNode.value > currentNode.value &&
+					newNode.value < currentNode.right.value
+				) {
+					let temp = currentNode.right;
+					currentNode.right = newNode;
+					newNode.right = temp;
+					`A new node with the value of ${val} has been inserted in the BST in a position that corresponds to its numerical value.`;
+					return this;
+				} else {
+					currentNode = currentNode.right;
+				}
+			}
+		}
+	};
+	console.log('A new BST has been created with a null root and no nodes.');
 }
 
-
 var MyBST = new BST();
-MyBST.add(770);
+MyBST.insert(613).insert(600).insert(500).insert(400).insert(555).insert(777);
 // End BST
+
 
 
 // Recursive Fibbonacci Function
