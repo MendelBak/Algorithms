@@ -85,13 +85,12 @@ function calculateMonthlyCost(
     monthlyRate,
 ) {
     console.log(
-        `Monthly Cost ~ Days In Month, Active Days, Monthly Rate`,
-        numOfDaysInMonth,
-        activeDaysInMonth,
-        monthlyRate,
+        `Days In Month: ${numOfDaysInMonth}. Active Days: ${activeDaysInMonth}. Monthly Rate: ${monthlyRate}. Daily Rate: ${
+            monthlyRate / numOfDaysInMonth
+        }`,
     );
     console.log(
-        'Charge for Month',
+        'Bill for Month: ',
         (monthlyRate / numOfDaysInMonth) * activeDaysInMonth,
     );
     return (monthlyRate / numOfDaysInMonth) * activeDaysInMonth;
@@ -103,6 +102,9 @@ function billFor(month, activeSubscription, users) {
     let totalRate = 0;
 
     users.forEach((user) => {
+        if (!user.activatedOn) {
+            return;
+        }
         let trackedDate = user.activatedOn;
         let lastDayWorkedInMonth = user.activatedOn.getDate();
         let nextDateToSet = null;
@@ -110,11 +112,16 @@ function billFor(month, activeSubscription, users) {
 
         while (
             user.deactivatedOn === null
-                ? trackedDate <= todayDate
+                ? trackedDate < todayDate
                 : trackedDate < user.deactivatedOn
         ) {
             if (user.deactivatedOn === null) {
-                nextDateToSet = nextDay(lastDayOfMonth(user.activatedOn)); // Sets trackedDate to 1st of the next month
+                if (!nextDateToSet) {
+                    nextDateToSet = nextDay(lastDayOfMonth(user.activatedOn)); // Need to set a value so later on it doesn't hit the null
+                } else {
+                    nextDateToSet = nextDay(lastDayOfMonth(trackedDate)); // Sets trackedDate to 1st of the next month
+                }
+
                 lastDayWorkedInMonth = lastDayOfMonth(trackedDate).getDate();
 
                 if (
@@ -150,9 +157,8 @@ function billFor(month, activeSubscription, users) {
         console.log('############');
         console.log('User total rate: ', user.name, totalRate);
         console.log('############');
-        totalRate = 0; // resetting between each user. Is that necessary? // TODO:
     });
-    // return totalRate;
+    return Math.round(totalRate * 100) / 100;
 }
 
 billFor(month, activeSubscription, users);
